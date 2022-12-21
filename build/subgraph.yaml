@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: DimoToken
@@ -18,10 +18,10 @@ dataSources:
         - Delegator
       abis:
         - name: DimoToken
-          file: ./abis/DimoToken.json
+          file: DimoToken/abis/DimoToken.json
       eventHandlers:
         - event: DelegateChanged(indexed address,indexed address,indexed address)
           handler: delegateChanged
         - event: DelegateVotesChanged(indexed address,uint256,uint256)
           handler: delegateVotesChanged
-      file: ./src/dimo_mapping.ts
+      file: DimoToken/DimoToken.wasm
