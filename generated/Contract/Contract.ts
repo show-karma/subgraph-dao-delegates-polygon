@@ -190,6 +190,7 @@ export class Contract extends ethereum.SmartContract {
   static bind(address: Address): Contract {
     return new Contract("Contract", address);
   }
+<<<<<<< HEAD
 
   DOMAIN_SEPARATOR(): Bytes {
     let result = super.call(
@@ -758,6 +759,8 @@ export class Contract extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
+=======
+>>>>>>> d442bbbd81340577bfae3412677627ed1e944dda
 }
 
 export class ConstructorCall extends ethereum.Call {
@@ -777,6 +780,7 @@ export class ConstructorCall__Inputs {
     this._call = call;
   }
 
+<<<<<<< HEAD
   get freeSupply(): BigInt {
     return this._call.inputValues[0].value.toBigInt();
   }
@@ -787,6 +791,14 @@ export class ConstructorCall__Inputs {
 
   get _claimPeriodEnds(): BigInt {
     return this._call.inputValues[2].value.toBigInt();
+=======
+  get _logic(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get _data(): Bytes {
+    return this._call.inputValues[1].value.toBytes();
+>>>>>>> d442bbbd81340577bfae3412677627ed1e944dda
   }
 }
 
@@ -798,6 +810,7 @@ export class ConstructorCall__Outputs {
   }
 }
 
+<<<<<<< HEAD
 export class ApproveCall extends ethereum.Call {
   get inputs(): ApproveCall__Inputs {
     return new ApproveCall__Inputs(this);
@@ -1132,10 +1145,27 @@ export class RenounceOwnershipCall__Inputs {
   _call: RenounceOwnershipCall;
 
   constructor(call: RenounceOwnershipCall) {
+=======
+export class DefaultCall extends ethereum.Call {
+  get inputs(): DefaultCall__Inputs {
+    return new DefaultCall__Inputs(this);
+  }
+
+  get outputs(): DefaultCall__Outputs {
+    return new DefaultCall__Outputs(this);
+  }
+}
+
+export class DefaultCall__Inputs {
+  _call: DefaultCall;
+
+  constructor(call: DefaultCall) {
+>>>>>>> d442bbbd81340577bfae3412677627ed1e944dda
     this._call = call;
   }
 }
 
+<<<<<<< HEAD
 export class RenounceOwnershipCall__Outputs {
   _call: RenounceOwnershipCall;
 
@@ -1310,6 +1340,12 @@ export class TransferOwnershipCall__Outputs {
   _call: TransferOwnershipCall;
 
   constructor(call: TransferOwnershipCall) {
+=======
+export class DefaultCall__Outputs {
+  _call: DefaultCall;
+
+  constructor(call: DefaultCall) {
+>>>>>>> d442bbbd81340577bfae3412677627ed1e944dda
     this._call = call;
   }
 }

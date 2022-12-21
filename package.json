@@ -4,7 +4,7 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ arthh/subgraph-dao-delegates-polygon",
+    "deploy": "graph deploy --product hosted-service show-karma/dao-delegates-polygon",
     "create-local": "graph create --node http://localhost:8020/ arthh/subgraph-dao-delegates-polygon",
     "remove-local": "graph remove --node http://localhost:8020/ arthh/subgraph-dao-delegates-polygon",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 arthh/subgraph-dao-delegates-polygon"
