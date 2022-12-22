@@ -3,27 +3,25 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: Contract
+    name: DimoToken
     network: matic
     source:
       address: "0xE261D618a959aFfFd53168Cd07D12E37B26761db"
-      abi: Contract
+      abi: DimoToken
+      startBlock: 34284528
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - AdminChanged
-        - BeaconUpgraded
-        - Upgraded
+        - Delegate
+        - Delegator
       abis:
-        - name: Contract
-          file: ./abis/Contract.json
+        - name: DimoToken
+          file: ./abis/DimoToken.json
       eventHandlers:
-        - event: AdminChanged(address,address)
-          handler: handleAdminChanged
-        - event: BeaconUpgraded(indexed address)
-          handler: handleBeaconUpgraded
-        - event: Upgraded(indexed address)
-          handler: handleUpgraded
-      file: ./src/mapping.ts
+        - event: DelegateChanged(indexed address,indexed address,indexed address)
+          handler: delegateChanged
+        - event: DelegateVotesChanged(indexed address,uint256,uint256)
+          handler: delegateVotesChanged
+      file: ./src/dimo_mapping.ts

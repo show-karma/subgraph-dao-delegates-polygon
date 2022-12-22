@@ -11,7 +11,7 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class ExampleEntity extends Entity {
+export class Organization extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -19,18 +19,18 @@ export class ExampleEntity extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save ExampleEntity entity without an ID");
+    assert(id != null, "Cannot save Organization entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type ExampleEntity must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type Organization must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("ExampleEntity", id.toString(), this);
+      store.set("Organization", id.toString(), this);
     }
   }
 
-  static load(id: string): ExampleEntity | null {
-    return changetype<ExampleEntity | null>(store.get("ExampleEntity", id));
+  static load(id: string): Organization | null {
+    return changetype<Organization | null>(store.get("Organization", id));
   }
 
   get id(): string {
@@ -42,30 +42,260 @@ export class ExampleEntity extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get count(): BigInt {
-    let value = this.get("count");
+  get token(): string {
+    let value = this.get("token");
+    return value!.toString();
+  }
+
+  set token(value: string) {
+    this.set("token", Value.fromString(value));
+  }
+
+  get delegates(): Array<string> | null {
+    let value = this.get("delegates");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set delegates(value: Array<string> | null) {
+    if (!value) {
+      this.unset("delegates");
+    } else {
+      this.set("delegates", Value.fromStringArray(<Array<string>>value));
+    }
+  }
+
+  get delegators(): Array<string> | null {
+    let value = this.get("delegators");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set delegators(value: Array<string> | null) {
+    if (!value) {
+      this.unset("delegators");
+    } else {
+      this.set("delegators", Value.fromStringArray(<Array<string>>value));
+    }
+  }
+}
+
+export class User extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save User entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type User must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("User", id.toString(), this);
+    }
+  }
+
+  static load(id: string): User | null {
+    return changetype<User | null>(store.get("User", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get delegateorganizations(): Array<string> | null {
+    let value = this.get("delegateorganizations");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set delegateorganizations(value: Array<string> | null) {
+    if (!value) {
+      this.unset("delegateorganizations");
+    } else {
+      this.set(
+        "delegateorganizations",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
+  }
+
+  get delegatororganizations(): Array<string> | null {
+    let value = this.get("delegatororganizations");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set delegatororganizations(value: Array<string> | null) {
+    if (!value) {
+      this.unset("delegatororganizations");
+    } else {
+      this.set(
+        "delegatororganizations",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
+  }
+}
+
+export class DelegateOrganization extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save DelegateOrganization entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type DelegateOrganization must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("DelegateOrganization", id.toString(), this);
+    }
+  }
+
+  static load(id: string): DelegateOrganization | null {
+    return changetype<DelegateOrganization | null>(
+      store.get("DelegateOrganization", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get delegate(): string {
+    let value = this.get("delegate");
+    return value!.toString();
+  }
+
+  set delegate(value: string) {
+    this.set("delegate", Value.fromString(value));
+  }
+
+  get organization(): string {
+    let value = this.get("organization");
+    return value!.toString();
+  }
+
+  set organization(value: string) {
+    this.set("organization", Value.fromString(value));
+  }
+
+  get voteBalance(): BigInt {
+    let value = this.get("voteBalance");
     return value!.toBigInt();
   }
 
-  set count(value: BigInt) {
-    this.set("count", Value.fromBigInt(value));
+  set voteBalance(value: BigInt) {
+    this.set("voteBalance", Value.fromBigInt(value));
   }
 
-  get previousAdmin(): Bytes {
-    let value = this.get("previousAdmin");
-    return value!.toBytes();
+  get firstTokenDelegatedAt(): BigInt | null {
+    let value = this.get("firstTokenDelegatedAt");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
   }
 
-  set previousAdmin(value: Bytes) {
-    this.set("previousAdmin", Value.fromBytes(value));
+  set firstTokenDelegatedAt(value: BigInt | null) {
+    if (!value) {
+      this.unset("firstTokenDelegatedAt");
+    } else {
+      this.set("firstTokenDelegatedAt", Value.fromBigInt(<BigInt>value));
+    }
+  }
+}
+
+export class DelegatorOrganization extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
   }
 
-  get newAdmin(): Bytes {
-    let value = this.get("newAdmin");
-    return value!.toBytes();
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save DelegatorOrganization entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type DelegatorOrganization must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("DelegatorOrganization", id.toString(), this);
+    }
   }
 
-  set newAdmin(value: Bytes) {
-    this.set("newAdmin", Value.fromBytes(value));
+  static load(id: string): DelegatorOrganization | null {
+    return changetype<DelegatorOrganization | null>(
+      store.get("DelegatorOrganization", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get delegator(): string {
+    let value = this.get("delegator");
+    return value!.toString();
+  }
+
+  set delegator(value: string) {
+    this.set("delegator", Value.fromString(value));
+  }
+
+  get delegate(): string {
+    let value = this.get("delegate");
+    return value!.toString();
+  }
+
+  set delegate(value: string) {
+    this.set("delegate", Value.fromString(value));
+  }
+
+  get organization(): string {
+    let value = this.get("organization");
+    return value!.toString();
+  }
+
+  set organization(value: string) {
+    this.set("organization", Value.fromString(value));
   }
 }
