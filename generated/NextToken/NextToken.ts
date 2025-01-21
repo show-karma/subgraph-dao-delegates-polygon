@@ -172,7 +172,7 @@ export class Transfer__Params {
   }
 }
 
-export class NextNetwork__checkpointsResultValue0Struct extends ethereum.Tuple {
+export class NextToken__checkpointsResultValue0Struct extends ethereum.Tuple {
   get fromBlock(): BigInt {
     return this[0].toBigInt();
   }
@@ -182,9 +182,9 @@ export class NextNetwork__checkpointsResultValue0Struct extends ethereum.Tuple {
   }
 }
 
-export class NextNetwork extends ethereum.SmartContract {
-  static bind(address: Address): NextNetwork {
-    return new NextNetwork("NextNetwork", address);
+export class NextToken extends ethereum.SmartContract {
+  static bind(address: Address): NextToken {
+    return new NextToken("NextToken", address);
   }
 
   DOMAIN_SEPARATOR(): Bytes {
@@ -276,7 +276,7 @@ export class NextNetwork extends ethereum.SmartContract {
   checkpoints(
     account: Address,
     pos: BigInt,
-  ): NextNetwork__checkpointsResultValue0Struct {
+  ): NextToken__checkpointsResultValue0Struct {
     let result = super.call(
       "checkpoints",
       "checkpoints(address,uint32):((uint32,uint224))",
@@ -286,7 +286,7 @@ export class NextNetwork extends ethereum.SmartContract {
       ],
     );
 
-    return changetype<NextNetwork__checkpointsResultValue0Struct>(
+    return changetype<NextToken__checkpointsResultValue0Struct>(
       result[0].toTuple(),
     );
   }
@@ -294,7 +294,7 @@ export class NextNetwork extends ethereum.SmartContract {
   try_checkpoints(
     account: Address,
     pos: BigInt,
-  ): ethereum.CallResult<NextNetwork__checkpointsResultValue0Struct> {
+  ): ethereum.CallResult<NextToken__checkpointsResultValue0Struct> {
     let result = super.tryCall(
       "checkpoints",
       "checkpoints(address,uint32):((uint32,uint224))",
@@ -308,9 +308,7 @@ export class NextNetwork extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      changetype<NextNetwork__checkpointsResultValue0Struct>(
-        value[0].toTuple(),
-      ),
+      changetype<NextToken__checkpointsResultValue0Struct>(value[0].toTuple()),
     );
   }
 

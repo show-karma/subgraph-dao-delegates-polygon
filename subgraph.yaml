@@ -28,10 +28,10 @@ dataSources:
           handler: transfer
       file: ./src/dimo_mapping.ts
   - kind: ethereum
-    name: NextNetwork
+    name: NextToken
     network: matic
     source:
-      abi: NextNetwork
+      abi: NextToken
       address: "0xFE67A4450907459c3e1FFf623aA927dD4e28c67a"
       startBlock: 0
     mapping:
@@ -42,7 +42,7 @@ dataSources:
         - DelegateChanged
         - DelegateVotesChanged
       abis:
-        - name: NextNetwork
+        - name: NextToken
           file: ./abis/NextToken.json
       eventHandlers:
         - event: DelegateChanged(indexed address,indexed address,indexed address)
@@ -51,10 +51,10 @@ dataSources:
           handler: handleDelegateVotesChanged
       file: ./src/everclear_mapping.ts
   - kind: ethereum
-    name: ClearNetwork
+    name: ClearToken
     network: matic
     source:
-      abi: NextNetwork
+      abi: ClearToken
       address: "0x58b9cB810A68a7f3e1E4f8Cb45D1B9B3c79705E8"
       startBlock: 0
     mapping:
@@ -65,8 +65,8 @@ dataSources:
         - DelegateChanged
         - DelegateVotesChanged
       abis:
-        - name: NextNetwork
-          file: ./abis/NextNetwork.json
+        - name: ClearToken
+          file: ./abis/ClearToken.json
       eventHandlers:
         - event: DelegateChanged(indexed address,indexed address,indexed address)
           handler: handleDelegateChanged
