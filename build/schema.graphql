@@ -17,6 +17,8 @@ type DelegateOrganization @entity {
   delegate: User!
   organization: Organization!
   voteBalance: BigInt!
+  voteBalanceV1: BigInt
+  voteBalanceV2: BigInt
   firstTokenDelegatedAt: BigInt
 }
 
@@ -26,7 +28,6 @@ type DelegatorOrganization @entity {
   delegate: User!
   organization: Organization!
 }
-
 
 type DelegateVotingPowerChange @entity {
   id: ID!
@@ -55,5 +56,7 @@ type DelegatingHistory @entity {
   fromDelegate: String
   toDelegate: String
   delegator: String!
+  amount: BigInt!
   timestamp: BigInt!
+  contract: String!
 }
