@@ -40,7 +40,6 @@ export function delegateChanged(event: DelegateChanged): void {
   if(!delegatingHistory){
     delegatingHistory = new DelegatingHistory(`${event.transaction.hash.toHexString()}-${event.logIndex.toString()}`);
     delegatingHistory.daoName = organization.id;
-    delegatingHistory.amount = BigInt.zero();
     delegatingHistory.timestamp = event.block.timestamp;
   }
 
@@ -89,22 +88,8 @@ export function delegateVotesChanged(event: DelegateVotesChanged): void {
   if(!delegatingHistory){
     delegatingHistory = new DelegatingHistory(`${event.transaction.hash.toHexString()}-${event.logIndex.toString()}`);
     delegatingHistory.daoName = organization.id;
-    delegatingHistory.amount = BigInt.zero();
     delegatingHistory.timestamp = event.block.timestamp;
     delegatingHistory.delegator = "0";
-  }
-
-  let delegatedAmount = event.params.newBalance.minus(event.params.previousBalance)
-
-  if (delegatedAmount < BigInt.zero()) {
-    delegatingHistory.fromDelegate = user.id
-  } else {
-    delegatingHistory.toDelegate = user.id
-  }
-  if (delegatingHistory.amount) {
-    delegatingHistory.amount = delegatingHistory.amount.plus(delegatedAmount);
-  } else {
-    delegatingHistory.amount = delegatedAmount;
   }
 
   delegatingHistory.save();
@@ -127,7 +112,6 @@ export function transfer(event: Transfer): void {
   if(!delegatingHistory){
     delegatingHistory = new DelegatingHistory(`${event.transaction.hash.toHexString()}-${event.logIndex.toString()}`);
     delegatingHistory.daoName = "dimo";
-    delegatingHistory.amount = BigInt.zero();
     delegatingHistory.timestamp = event.block.timestamp;
     delegatingHistory.delegator = event.params.from.toHexString();
   }
