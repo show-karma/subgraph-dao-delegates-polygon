@@ -3,31 +3,6 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: DimoToken
-    network: matic
-    source:
-      address: "0xE261D618a959aFfFd53168Cd07D12E37B26761db"
-      abi: DimoToken
-      startBlock: 34284528
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - Delegate
-        - Delegator
-      abis:
-        - name: DimoToken
-          file: ./abis/DimoToken.json
-      eventHandlers:
-        - event: DelegateChanged(indexed address,indexed address,indexed address)
-          handler: delegateChanged
-        - event: DelegateVotesChanged(indexed address,uint256,uint256)
-          handler: delegateVotesChanged
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: transfer
-      file: ./src/dimo_mapping.ts
-  - kind: ethereum
     name: NextToken
     network: matic
     source:
